@@ -65,12 +65,12 @@ fn main() {
 
     let rec_a  = thread::spawn( move || {
         for message in r2 {
-            println!("recever A got: {}", message);
+            println!("receiver A got: {}", message);
         }
     });
     let rec_b  = thread::spawn( move || {
         for message in r3 {
-            println!("recever B got: {}", message);
+            println!("receiver B got: {}", message);
         }
     });
 
@@ -82,9 +82,11 @@ fn main() {
         pause_ms(50);
     }
 
-    drop(s2);
+    drop(s2); //need to close channel so receiving ends will break their loops or else it will wait forever
 
     rec_a.join().unwrap();
     rec_b.join().unwrap();
-    println!("Main thread: Exiting.")
+    println!("Main thread: Exiting.");
+
+
 }
