@@ -58,7 +58,7 @@ fn main() {
     handle_b.join().unwrap();
 
 
-    //create one sender in main and two receiver in chiled threads
+    //create one sender in main and two receivers in child threads
     let  (s2, r2)  = crossbeam::channel::unbounded();
     let r3 = r2.clone();
 
